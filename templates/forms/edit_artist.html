@@ -1,0 +1,92 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Edit Artist{% endblock %}
+{% block content %}
+  <div class="form-wrapper">
+    <form id="form">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" id="name" name="name" autofocus=True>
+        <input class="form-control" data-id="{{ d.id }}" hidden>
+      </div>
+      <div class="form-group">
+          <label>City & State</label>
+          <div class="form-inline">
+            <div class="form-group">
+              <input class="form-control" type="text" id="city" name="city">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" id="state" name="state">
+            </div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="phone">Phone</label>
+          <input class="form-control" type="text" id="phone" name="phone">
+        </div>
+      <div class="form-group">
+        <label for="genres">Genres</label>
+        <input class="form-control" type="text" id="genres" name="genres">
+      </div>
+      <div class="form-group">
+          <label for="facebook_link">Facebook Link</label>
+          <input class="form-control" type="text" id="facebook_link" name="name">
+        </div>
+      
+        <div class="form-group">
+          <label for="image_link">Image Link</label>
+          <input class="form-control" type="text" id="image_link" name="image_link">
+        </div>
+
+        <div class="form-group">
+            <label for="website_link">Website Link</label>
+            <input class="form-control" type="text" id="web_link" name="web_link">
+          </div>
+
+          <div class="form-group">
+              <label for="Looking_for_Venues">Looking for Venues</label>
+              <input class="form-control" type="text" id="looking_for_Venues" name="looking_for_Venues">
+          </div>
+
+          <div class="form-group">
+              <label for="seeking_description">Seeking Description</label>
+              <input class="form-control" type="text" id="seeking_Description" name="seeking_Description">
+            </div>
+      <input type="submit" value="Save Change" class="btn btn-primary btn-lg btn-block">
+     
+    </form>  
+    <span id="error" class="hidden">Erreur !</span>
+    <span id="success" class="hidden">Saved <a href="http://127.0.0.1:5000/artists">return to artist list</a></span>
+   
+    //UPDATE Artits
+    <script>
+       const checkboxes = document.querySelectorAll('.editbtn');
+        const artistId = e.target.dataset['id'];
+        fetch('/artists/' + artistId + '/edit', { 
+            method: 'POST',
+            body: JSON.stringify({
+            'name': name,
+            'state': state,
+            'phone': phone,
+            'city': city,
+            'genres': genres,
+            'web_link': web_link,
+            'facebook_link': facebook_link,
+            'image_link': image_link,
+            'looking_for_Venues': looking_for_Venues,
+            'seeking_Description': seeking_Description,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function() {
+            document.getElementById('error').className = 'hidden';
+        })
+        .catch(function() {
+             document.getElementById('error').className = '';
+        })
+       
+  </script>
+  </div>
+{% endblock %}
