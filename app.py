@@ -93,7 +93,7 @@ app.jinja_env.filters['datetime'] = format_datetime
 # Controllers.
 #----------------------------------------------------------------------------#
 
-@app.route('/artist/artist_id>')
+@app.route('/artist/<artist_id>')
 def get_list_artists(artist_id):
     return render_template('artists.html',
     artists=Artist.query.filter_by(artist_id=artist_id).order_by('id').all())
